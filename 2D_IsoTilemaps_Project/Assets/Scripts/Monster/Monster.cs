@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Monster : MonoBehaviour
 {
     [SerializeField]
-    private float detectPlayerRange, attackPlayerRange, attackDamage, attackCooldown, health, maxHealth;
+    protected float detectPlayerRange, attackPlayerRange, attackDamage, attackCooldown, health, maxHealth;
 
     [SerializeField]
     private Image backbarImg, frontbarImg;
@@ -15,11 +15,8 @@ public class Monster : MonoBehaviour
     private string stage = "idle";
     private bool onAttackCooldown;
 
-    // Start is called before the first frame update
-    void Start()
+    protected virtual void InitStatus()
     {
-        monsterMovementController = GetComponent<MonsterMovementController>();
-        player = GameObject.FindGameObjectWithTag("Player"); // get player instance with tag
         detectPlayerRange = 2.5f;
         attackPlayerRange = 0.5f;
         attackDamage = 10.0f;
@@ -27,6 +24,15 @@ public class Monster : MonoBehaviour
         maxHealth = 100.0f;
         attackCooldown = 1.0f;
         onAttackCooldown = false;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        monsterMovementController = GetComponent<MonsterMovementController>();
+        player = GameObject.FindGameObjectWithTag("Player"); // get player instance with tag
+        onAttackCooldown = false;
+        InitStatus();
     }
 
     // Login Control part
@@ -104,13 +110,19 @@ public class Monster : MonoBehaviour
         }
         else if(!onAttackCooldown) // attack player
         {
-            Player player = Player.player;
-            player.DealDamage(attackDamage);
-            StartCoroutine(CooldownAttack());
+            this.Attack();
         }
     }
 
-    IEnumerator CooldownAttack()
+    // Attack player
+    public virtual void Attack()
+    {
+        Player player = Player.player;
+        player.DealDamage(attackDamage);
+        StartCoroutine(CooldownAttack());
+    }
+
+    protected IEnumerator CooldownAttack()
     {
         onAttackCooldown = true;
         // Wait for the cooldown time

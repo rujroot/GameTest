@@ -64,6 +64,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("MonsterBullet"))
+        {
+            float damage = other.gameObject.GetComponent<BulletBehavior>().getDamage();
+            DealDamage(damage);
+            Destroy(other.gameObject);
+        }
+    }
+
     IEnumerator CooldownBullet()
     {
         OnCooldownBullet = true;
