@@ -25,7 +25,7 @@ public class IsometricCharacterRenderer : MonoBehaviour
         string[] directionArray = null;
 
         //measure the magnitude of the input.
-        if (direction.magnitude < .05f)
+        if (direction.magnitude < .1f)
         {
             //if we are basically standing still, we'll use the Static states
             //we won't be able to calculate a direction if the user isn't pressing one, anyway!

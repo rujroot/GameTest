@@ -8,7 +8,7 @@ public class Wizard : Monster
     private GameObject bullet;
 
     [SerializeField]
-    private float bulletSpeed;
+    protected float bulletSpeed;
 
     protected override void InitStatus()
     {
@@ -21,7 +21,7 @@ public class Wizard : Monster
         bulletSpeed = 2.0f;
     }
 
-    public override void Attack()
+    protected override void Attack()
     {
         // get current direction
         Rigidbody2D rbody = GetComponent<Rigidbody2D>();

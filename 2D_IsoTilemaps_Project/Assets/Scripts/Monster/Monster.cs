@@ -10,10 +10,10 @@ public class Monster : MonoBehaviour
     [SerializeField]
     private Image backbarImg, frontbarImg;
 
-    private GameObject player;
-    private MonsterMovementController monsterMovementController;
-    private string stage = "idle";
-    private bool onAttackCooldown;
+    protected GameObject player;
+    protected MonsterMovementController monsterMovementController;
+    protected string stage = "idle";
+    protected bool onAttackCooldown;
 
     protected virtual void InitStatus()
     {
@@ -42,7 +42,7 @@ public class Monster : MonoBehaviour
         Think();
     }
 
-    private void Think()
+    protected virtual void Think()
     {
         switch (stage)
         {
@@ -59,7 +59,7 @@ public class Monster : MonoBehaviour
     }
 
     // Search for player if player not in detect range
-    public virtual void SearchPlayer() {
+    protected virtual void SearchPlayer() {
         float distance = Vector3.Distance(transform.position, player.transform.position);
 
         if (distance <= detectPlayerRange) // walk to player
@@ -75,7 +75,7 @@ public class Monster : MonoBehaviour
     }
 
     // Walk to player if player in detect range
-    public virtual void WalkToPlayer() {
+    protected virtual void WalkToPlayer() {
         float distance = Vector3.Distance(transform.position, player.transform.position);
 
         if (distance >= detectPlayerRange) // not walk
@@ -92,7 +92,7 @@ public class Monster : MonoBehaviour
     }
 
     // attack player if player in attack range
-    public virtual void AttackPlayer() {
+    protected virtual void AttackPlayer() {
         float distance = Vector3.Distance(transform.position, player.transform.position);
 
         if (distance >= attackPlayerRange) // if not in attack range
@@ -115,7 +115,7 @@ public class Monster : MonoBehaviour
     }
 
     // Attack player
-    public virtual void Attack()
+    protected virtual void Attack()
     {
         Player player = Player.player;
         player.DealDamage(attackDamage);
