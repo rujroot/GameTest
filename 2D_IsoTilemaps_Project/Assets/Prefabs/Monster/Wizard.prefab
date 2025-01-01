@@ -20,6 +20,8 @@ MonoBehaviour:
   maxHealth: 50
   backbarImg: {fileID: 8057927417843876085}
   frontbarImg: {fileID: 3788089527579317005}
+  dieEffect: {fileID: 6607327141145095556, guid: bcf40af2aa57d89499b5f7482faf6bda,
+    type: 3}
   bullet: {fileID: 8063282346789223741, guid: 87cb7a7d5a8a75f42910552e02b9b692, type: 3}
   bulletSpeed: 2
 --- !u!1001 &5355372622165597197

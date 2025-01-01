@@ -33,6 +33,8 @@ MonoBehaviour:
   maxHealth: 100
   backbarImg: {fileID: 2702609809915469048}
   frontbarImg: {fileID: 9134395554312638208}
+  dieEffect: {fileID: 6607327141145095556, guid: bcf40af2aa57d89499b5f7482faf6bda,
+    type: 3}
 --- !u!1 &2033401399345275638
 GameObject:
   m_ObjectHideFlags: 0

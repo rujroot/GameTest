@@ -10,6 +10,9 @@ public class Monster : MonoBehaviour
     [SerializeField]
     private Image backbarImg, frontbarImg;
 
+    [SerializeField]
+    private GameObject dieEffect;
+
     protected GameObject player;
     protected MonsterMovementController monsterMovementController;
     protected string stage = "idle";
@@ -159,6 +162,8 @@ public class Monster : MonoBehaviour
 
         if(health <= 0)
         {
+            GameObject newDieEffect = Instantiate(dieEffect);
+            newDieEffect.transform.position = transform.position;
             Destroy(gameObject);
         }
 
