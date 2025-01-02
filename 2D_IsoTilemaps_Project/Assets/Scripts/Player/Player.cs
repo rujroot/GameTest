@@ -37,15 +37,22 @@ public class Player : MonoBehaviour
 
     private void DetectInput()
     {
-        if (Input.GetKeyDown(KeyCode.F) && !OnCooldownBullet) // Fire bullet
+        if (Input.GetKeyDown(KeyCode.F)) // Fire bullet
         {
-            GameObject newbullet = Instantiate(bullet);
-            newbullet.transform.position = transform.position;
-
-            Vector2 currentDirection = GetComponent<IsometricPlayerMovementController>().getCurrentDirection();
-            newbullet.AddComponent<BulletBehavior>().Fire(currentDirection, bulletSpeed, bulletDamage);
-            StartCoroutine(CooldownBullet()); // Cooldown Bullet
+            PlayerAttack();
         }
+    }
+
+    public void PlayerAttack()
+    {
+        if (OnCooldownBullet) return; // if on cooldown then do nothing
+
+        GameObject newbullet = Instantiate(bullet);
+        newbullet.transform.position = transform.position;
+
+        Vector2 currentDirection = GetComponent<IsometricPlayerMovementController>().getCurrentDirection();
+        newbullet.AddComponent<BulletBehavior>().Fire(currentDirection, bulletSpeed, bulletDamage);
+        StartCoroutine(CooldownBullet()); // Cooldown Bullet
     }
 
     private void UpdateUI()

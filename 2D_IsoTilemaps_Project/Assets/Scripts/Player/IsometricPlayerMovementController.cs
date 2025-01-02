@@ -7,10 +7,10 @@ public class IsometricPlayerMovementController : MonoBehaviour
 
     public float movementSpeed = 1f;
     IsometricCharacterRenderer isoRenderer;
-
     Rigidbody2D rbody;
-
     private Vector2 currentDirection;
+
+    [SerializeField] private FixedJoystick joystick;
 
     private void Awake()
     {
@@ -24,9 +24,21 @@ public class IsometricPlayerMovementController : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 currentPos = rbody.position;
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
+
+        // input from keyboard
+        float horizontalInputKeyboard = Input.GetAxis("Horizontal");
+        float verticalInputKeyboard = Input.GetAxis("Vertical");
+        Vector2 inputKeyboard = new Vector2(horizontalInputKeyboard, verticalInputKeyboard);
+
+        // input from joystick
+        float horizontalInputJoystick = joystick.Horizontal;
+        float verticalInputJoystick = joystick.Vertical;
+        Vector2 inputJoystick = new Vector2(horizontalInputJoystick, verticalInputJoystick);
+
+        // Decide if joystick move then choose joystick
+        Vector2 inputVector = (inputJoystick.magnitude > 0.01f) ? inputJoystick : inputKeyboard;
+
+        // move character
         inputVector = Vector2.ClampMagnitude(inputVector, 1);
         Vector2 movement = inputVector * movementSpeed;
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
