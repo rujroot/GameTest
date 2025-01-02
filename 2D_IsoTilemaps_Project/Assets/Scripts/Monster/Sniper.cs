@@ -11,11 +11,11 @@ public class Sniper : Wizard
         detectPlayerRange = 4.0f;
         runAwayRange = 2.5f;
         attackPlayerRange = 4.0f;
-        attackDamage = 15.0f;
+        attackDamage = 5.0f;
         health = 50.0f;
         maxHealth = 50.0f;
         attackCooldown = 5.0f;
-        bulletSpeed = 2.5f;
+        bulletSpeed = 2.0f;
     }
 
     // Walk to player if player in detect range

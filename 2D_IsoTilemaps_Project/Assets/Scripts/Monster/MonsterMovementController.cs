@@ -42,7 +42,6 @@ public class MonsterMovementController : MonoBehaviour
 
     public void RunAway() // Run away from player
     {
-        print("RunAway");
         // get player position
         Transform playerTransform = Player.player.gameObject.transform;
         Vector2 playerPosition = new Vector2(playerTransform.position.x, playerTransform.position.y);

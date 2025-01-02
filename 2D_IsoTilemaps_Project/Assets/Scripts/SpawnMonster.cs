@@ -24,7 +24,7 @@ public class SpawnMonster : MonoBehaviour
     void Update()
     {
         int currentCountMonster = monsterGroup.transform.childCount;
-        if(currentCountMonster < monsterPerMap && !onCooldown)
+        if((currentCountMonster < monsterPerMap && !onCooldown) || currentCountMonster == 0)
         {
             int randomSpawnCount = Random.Range(1, 6);
             randomSpawnCount = Mathf.Min(monsterPerMap - currentCountMonster, randomSpawnCount);
@@ -37,12 +37,12 @@ public class SpawnMonster : MonoBehaviour
     {
         for(int i = 0; i < count; ++i)
         {
-            int randomSpawnPoint = Random.Range(0, spawnPoints.Count + 1);
-            int randomMonster = Random.Range(0, spawnMosnters.Count + 1);
+            int randomSpawnPoint = Random.Range(0, spawnPoints.Count);
+            int randomMonster = Random.Range(0, spawnMosnters.Count);
 
             // spawn new monster
             GameObject newMonster = Instantiate(spawnMosnters[randomMonster], monsterGroup.transform);
-            newMonster.transform.position = spawnPoints[randomSpawnPoint].transform.position;
+            newMonster.transform.position = spawnPoints[randomSpawnPoint].transform.position + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
         }
     }
 

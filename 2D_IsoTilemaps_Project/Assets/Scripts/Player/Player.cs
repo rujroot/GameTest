@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -67,7 +68,7 @@ public class Player : MonoBehaviour
         health = Mathf.Max(0, health - Damage);
         if(health <= 0)
         {
-            // Game Over
+            SceneManager.LoadScene("GameOver");
         }
     }
 
